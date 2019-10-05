@@ -1,25 +1,25 @@
-# sudo: required
-# services:
-#   - docker
+sudo: required
+services:
+  - docker
 
-# before_install:
-#   - docker build -t sjegadison/react-test -f ./client/Dockerfile.dev ./client
+before_install:
+  - docker build -t sjegadison/react-test -f ./client/Dockerfile.dev ./client
 
-# script:
-#   - docker run -e CI=true sjegadison/react-test npm test
+script:
+  - docker run -e CI=true sjegadison/react-test npm test
 
 # after_success:
-#   - docker build -t sjegadison/multi-client ./client
-#   - docker build -t sjegadison/multi-nginx ./nginx
-#   - docker build -t sjegadison/multi-server ./server
-#   - docker build -t sjegadison/multi-worker ./worker
-#   # Log in to the docker CLI
-#   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-#   # Take those images and push them to docker hub
-#   - docker push sjegadison/multi-client
-#   - docker push sjegadison/multi-nginx
-#   - docker push sjegadison/multi-server
-#   - docker push sjegadison/multi-worker
+  - docker build -t sjegadison/multi-client ./client
+  - docker build -t sjegadison/multi-nginx ./nginx
+  - docker build -t sjegadison/multi-server ./server
+  - docker build -t sjegadison/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push sjegadison/multi-client
+  - docker push sjegadison/multi-nginx
+  - docker push sjegadison/multi-server
+  - docker push sjegadison/multi-worker
 # deploy:
 #   provider: elasticbeanstalk
 #   region: "us-east-2"
